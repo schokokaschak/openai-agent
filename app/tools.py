@@ -1,8 +1,6 @@
 from agents import function_tool
 import os, subprocess, shutil
-MAX_CHARS = 10000
-
-WORK_DIR = os.path.abspath("./data")
+from config import *
 
 @function_tool
 def get_file_content(file_path: str) -> str:
