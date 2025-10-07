@@ -1,5 +1,4 @@
 from agents import Agent, Runner
-import traceback
 from dotenv import load_dotenv
 load_dotenv()
 from app.tools import get_file_content, get_files_info, write_file, run_python_file, delete_file, delete_folder
@@ -15,16 +14,12 @@ def run_agent(prompt: str) -> dict:
         ),
         tools=[get_file_content, get_files_info, write_file, run_python_file, delete_folder, delete_file],
         )   
-
+        
         result = Runner.run_sync(agent, prompt)
         return {"summary": str(result.final_output)}
 
     except Exception as e:
-        print(f"!!!!!! ES IST EIN FEHLER AUFGETRETEN !!!!!!")
-        print(f"Fehlertyp: {type(e).__name__}")
-        print(f"Fehlermeldung: {e}")
-        traceback.print_exc() # Gibt den kompletten Fehlerverlauf aus
-        return {"summary": f"An error occurred: {str(e)}"}
+        return {"error": str(e)}
 
 
 def main():

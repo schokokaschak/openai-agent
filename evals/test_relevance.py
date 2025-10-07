@@ -8,6 +8,8 @@ metric = AnswerRelevancyMetric(
 	include_reason=True
 	)
 
+#number of relevant statements / total number of statements
+
 test_case1 = LLMTestCase(
 	input = "What is the capital of Germany?",
 	actual_output = run_agent("What is the capital of Germany?")["summary"]
