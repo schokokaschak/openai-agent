@@ -1,6 +1,10 @@
 from agents import function_tool
 import os, subprocess, shutil
 from app.config import *
+from deepeval.test_case import ToolCall
+from typing import Any, List
+
+
 
 @function_tool
 def get_file_content(file_path: str) -> str:
@@ -124,3 +128,39 @@ def delete_folder(folder_path: str) -> str:
         return f'Successfully deleted folder "{folder_path}" and all its contents'
     except Exception as e:
         return f"Error: deleting folder: {e}"
+    
+
+def extract_tool_calls(original_response: Any) -> List[ToolCall]:
+        tool_calls = []
+
+        if not hasattr(original_response, "new_items") or not original_response.new_items:
+            return tool_calls
+
+        # First pass: collect all tool call items
+        tool_call_items = {}
+        output_items = {}
+
+        # Collect tool calls and outputs
+        for item in original_response.new_items:
+
+            if isinstance(item, "ToolCallItem") or isinstance(item, "ToolCallOutputItem"):
+                if item.type == "tool_call_item":
+                    call_id = getattr(item.raw_item, "call_id", None) or getattr(item.raw_item, "id", None)
+                    tool_call_items[call_id] = item
+                elif item.type == "tool_call_output_item":
+                    call_id = item.raw_item.get("call_id") or item.raw_item.get("id")
+                    output_items[call_id] = item.output
+
+        # Create ToolCall objects with matched outputs, if available
+        for call_id, item in tool_call_items.items():
+            try:
+                tool_name = item.raw_item.name
+                input_parameters = json.loads(item.raw_item.arguments)
+                tool_call = ToolCall(
+                    name=tool_name, input_parameters=input_parameters, output=output_items.get(call_id)
+                )
+                tool_calls.append(tool_call)
+            except Exception as e:
+                return f"Error extracting tool call: {e}"
+
+        return tool_calls

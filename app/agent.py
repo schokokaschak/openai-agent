@@ -1,7 +1,7 @@
 from agents import Agent, Runner
 from dotenv import load_dotenv
 load_dotenv()
-from app.tools import get_file_content, get_files_info, write_file, run_python_file, delete_file, delete_folder
+from app.tools import get_file_content, get_files_info, write_file, run_python_file, delete_file, delete_folder, extract_tool_calls
 
 def run_agent(prompt: str) -> dict:
     try:
@@ -14,9 +14,15 @@ def run_agent(prompt: str) -> dict:
         ),
         tools=[get_file_content, get_files_info, write_file, run_python_file, delete_folder, delete_file],
         )   
-        
+
         result = Runner.run_sync(agent, prompt)
-        return {"summary": str(result.final_output)}
+        
+        
+        finish = dict()
+        finish["summary"] =  str(result.final_output)
+        finish["used_func"] = extract_tool_calls(result)
+        print(finish)
+        return {finish}
 
     except Exception as e:
         return {"error": str(e)}
