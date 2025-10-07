@@ -1,0 +1,2 @@
+openai-agents==0.3.3
+deepeval==3.6.3

@@ -5,5 +5,16 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "deepeval>=3.6.3",
     "openai-agents>=0.3.3",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "evals"
+]
+python_files = [
+    "test_*.py"
 ]

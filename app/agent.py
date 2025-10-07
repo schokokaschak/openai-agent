@@ -1,7 +1,7 @@
 from agents import Agent, Runner
 from dotenv import load_dotenv
 load_dotenv()
-from tools import get_file_content, get_files_info, write_file, run_python_file, delete_file, delete_folder
+from app.tools import get_file_content, get_files_info, write_file, run_python_file, delete_file, delete_folder
 
 def run_agent(prompt: str) -> dict:
     try:

@@ -1,11 +1,10 @@
 from agents import function_tool
 import os, subprocess, shutil
-from config import *
+from app.config import *
 
 @function_tool
 def get_file_content(file_path: str) -> str:
     abs_file_path = os.path.abspath(os.path.join(WORK_DIR, file_path))
-    print("funktion get_file_content aufgerufen")
     if not abs_file_path.startswith(WORK_DIR):
         return f'Error: Cannot read "{file_path}" as it is outside the permitted working directory'
     if not os.path.isfile(abs_file_path):
