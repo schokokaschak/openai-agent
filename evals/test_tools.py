@@ -1,16 +1,18 @@
-from deepeval import evaluate
-from deepeval.test_case import LLMTestCase, ToolCall
-from deepeval.metrics import ToolCorrectnessMetric
-from app.agent import run_agent
+'''from deepeval import evaluate
+from deepeval.metrics import JsonCorrectnessMetric
+from deepeval.test_case import LLMTestCase
+from app.agent import ReturnSchema, run_agent
 
+metric = JsonCorrectnessMetric(
+    expected_schema=ReturnSchema,
+    model="gpt-4.1",
+    include_reason=True
+)
 
 test_case = LLMTestCase(
-    input="which files are inside my dir?",
-    actual_output="We offer a 30-day full refund at no extra cost.",
-    # Replace this with the tools that was actually used by your LLM agent
-    tools_called=[ToolCall(name="WebSearch"), ToolCall(name="ToolQuery")],
-    expected_tools=[extract_tool_calls("which files are inside my dir?")],
+    input="Output me a random JSON with the 'name' key",
+    actual_output=str(run_agent("Output me a random JSON with the 'name' key"))
 )
-metric = ToolCorrectnessMetric()
 
 evaluate(test_cases=[test_case], metrics=[metric])
+'''

@@ -28,3 +28,4 @@ for golden in dataset.goldens:
 		)
 	)
 evaluate(test_cases=dataset.test_cases, metrics=[metric])
+
