@@ -1,6 +1,9 @@
 from agents import function_tool
-import os, subprocess, shutil
-from app.config import *
+import os
+import subprocess
+import shutil
+from app.config import WORK_DIR, MAX_CHARS
+
 
 @function_tool
 def get_file_content(file_path: str) -> str:
@@ -20,7 +23,8 @@ def get_file_content(file_path: str) -> str:
     except Exception as e:
         return f'Error reading file "{file_path}": {e}'
 
-@function_tool  
+
+@function_tool
 def get_files_info(directory: str = ".") -> str:
     target_dir = os.path.abspath(os.path.join(WORK_DIR, directory))
     if not target_dir.startswith(WORK_DIR):
@@ -41,7 +45,8 @@ def get_files_info(directory: str = ".") -> str:
     except Exception as e:
         return f"Error listing files: {e}"
 
-@function_tool   
+
+@function_tool
 def write_file(file_path: str, content: str) -> str:
     abs_file_path = os.path.abspath(os.path.join(WORK_DIR, file_path))
     if not abs_file_path.startswith(WORK_DIR):
@@ -62,7 +67,8 @@ def write_file(file_path: str, content: str) -> str:
     except Exception as e:
         return f"Error: writing to file: {e}"
 
-@function_tool  
+
+@function_tool
 def run_python_file(file_path: str, args: None = None) -> str:
     abs_file_path = os.path.abspath(os.path.join(WORK_DIR, file_path))
     if not abs_file_path.startswith(WORK_DIR):
@@ -95,7 +101,8 @@ def run_python_file(file_path: str, args: None = None) -> str:
     except Exception as e:
         return f"Error: executing Python file: {e}"
 
-@function_tool   
+
+@function_tool
 def delete_file(file_path: str) -> str:
     abs_file_path = os.path.abspath(os.path.join(WORK_DIR, file_path))
     if not abs_file_path.startswith(WORK_DIR):
@@ -109,6 +116,7 @@ def delete_file(file_path: str) -> str:
         return f'Successfully deleted "{file_path}"'
     except Exception as e:
         return f"Error: deleting file: {e}"
+
 
 @function_tool
 def delete_folder(folder_path: str) -> str:
@@ -124,4 +132,3 @@ def delete_folder(folder_path: str) -> str:
         return f'Successfully deleted folder "{folder_path}" and all its contents'
     except Exception as e:
         return f"Error: deleting folder: {e}"
-    

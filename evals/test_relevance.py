@@ -3,22 +3,13 @@ from deepeval.test_case import LLMTestCase
 from deepeval.metrics import AnswerRelevancyMetric
 from app.agent import run_agent
 
-metric = AnswerRelevancyMetric(
-	threshold=0.7,
-	include_reason=True
-	)
+metric = AnswerRelevancyMetric(threshold=0.7, include_reason=True)
 
-#number of relevant statements / total number of statements
+# number of relevant statements / total number of statements
 
 test_case1 = LLMTestCase(
-	input = "What is the capital of Germany?",
-	actual_output = run_agent("What is the capital of Germany?")["summary"]
-		
+    input="What is the capital of Germany?",
+    actual_output=run_agent("What is the capital of Germany?")["summary"],
 )
 
 evaluate(test_cases=[test_case1], metrics=[metric])
-
-
-
-
-
