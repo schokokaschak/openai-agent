@@ -20,7 +20,9 @@ def get_file_content(file_path: str) -> str:
         with open(abs_file_path, "r") as f:
             content = f.read(MAX_CHARS)
             if os.path.getsize(abs_file_path) > MAX_CHARS:
-                content += f'[...File "{file_path}" truncated at {MAX_CHARS} characters]'
+                content += (
+                    f'[...File "{file_path}" truncated at {MAX_CHARS} characters]'
+                )
         return content
     except Exception as e:
         return f'Error reading file "{file_path}": {e}'
@@ -43,7 +45,9 @@ def get_files_info(directory: str = ".") -> str:
             filepath = os.path.join(target_dir, filename)
             is_dir = os.path.isdir(filepath)
             file_size = os.path.getsize(filepath)
-            files_info.append(f"- {filename}: file_size={file_size} bytes, is_dir={is_dir}")
+            files_info.append(
+                f"- {filename}: file_size={file_size} bytes, is_dir={is_dir}"
+            )
         return "\n".join(files_info)
     except Exception as e:
         return f"Error listing files: {e}"
@@ -68,13 +72,15 @@ def write_file(file_path: str, content: str) -> str:
     try:
         with open(abs_file_path, "w") as f:
             f.write(content)
-        return f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+        return (
+            f'Successfully wrote to "{file_path}" ({len(content)} characters written)'
+        )
     except Exception as e:
         return f"Error: writing to file: {e}"
 
 
 @function_tool
-def run_python_file(file_path: str, args: list = None) -> str:
+def run_python_file(file_path: str, args: None = None) -> str:
     """
     Executes a Python file within WORK_DIR.
     Optional 'args' can be passed to the Python script.

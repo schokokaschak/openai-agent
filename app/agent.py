@@ -45,7 +45,9 @@ def run_agent(prompt: str) -> dict:
 
         # Prepare the result for returning
         finish = dict()
-        finish["summary"] = str(result.final_output)  # Convert the agent's output to a string
+        finish["summary"] = str(
+            result.final_output
+        )  # Convert the agent's output to a string
         return finish
 
     except Exception as e:

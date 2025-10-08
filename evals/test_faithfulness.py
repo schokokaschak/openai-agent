@@ -12,8 +12,12 @@ metric = FaithfulnessMetric(threshold=0.5, include_reason=True)
 # Define a single test case for the LLM
 test_case = LLMTestCase(
     input="How many people life in Karaganda?",  # The question to ask the agent
-    actual_output=run_agent("How many people life in Karaganda?")["summary"],  # The agent's response
-    retrieval_context=["In Karaganda living about 20 million people"],  # Context used for checking faithfulness
+    actual_output=run_agent("How many people life in Karaganda?")[
+        "summary"
+    ],  # The agent's response
+    retrieval_context=[
+        "In Karaganda living about 20 million people"
+    ],  # Context used for checking faithfulness
 )
 
 # Run the evaluation
