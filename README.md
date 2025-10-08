@@ -79,15 +79,15 @@ deepeval test run evals/golden.py
 
 openai-agent/  
 ├── app/  
-│   ├── agent.py          # Main agent code  
-│   ├── tools.py          # Custom agent tools  
-│   ├── config.py         # Configuration variables  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── agent.py          # Main agent code  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── tools.py          # Custom agent tools  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── config.py         # Configuration variables  
 ├── data/                 # Working directory for agent operations  
 ├── evals/                # DeepEval test cases  
-|   |── test_faithfulness.py  
-|   |── test_golden.py  
-|   |── test_relevance.py  
-|   |── test_tools.py  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_faithfulness.py  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_golden.py  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_relevance.py  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_tools.py  
 ├── requirements.txt  
 ├── README.md  
 ├── .env.example          # you can store your API key here  
