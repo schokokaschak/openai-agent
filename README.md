@@ -70,7 +70,7 @@ pytest -q -s # run all tests with output
 or run deepeval tests 
 ```bash
 deepeval test run evals/test_faithfulness.py
-deepeval test run evals/test_tools.py
+deepeval test run evals/test_json.py
 deepeval test run evals/test_relevance.py
 deepeval test run evals/golden.py
 ```
@@ -87,7 +87,7 @@ openai-agent/
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_faithfulness.py  
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_golden.py  
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_relevance.py  
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_tools.py  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|── test_json.py  
 ├── requirements.txt  
 ├── README.md  
 ├── .env.example          # you can store your API key here  
