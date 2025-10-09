@@ -62,17 +62,78 @@ run_python_file(file_path, args) - Execute a Python file with optional arguments
 delete_file(file_path) - Delete a single file  
 delete_folder(folder_path) - Delete a folder and all its contents  
 
-## Running Tests
-```bash
-pytest -q -s # run all tests with output
-```
+# 🧠 LLM Evaluation Tests
 
-or run deepeval tests 
+This project contains several automated tests run with [DeepEval](https://github.com/confident-ai/deepeval).  
+The goal is to evaluate the behavior of the agent (`run_agent`) and ensure that its responses are consistent, accurate, and contextually faithful.  
+Each test assesses different quality aspects of the LLM outputs.
+
+---
+
+## 🔹 1. Faithfulness Tests (`test_faithfulness.py`)
+**Goal:**  
+Checks whether the agent's answers are **faithful to the provided retrieval context**.  
+The test does **not** evaluate real-world truth, only whether the output **only uses information present in the context**. 
+You can change the retrievel context in the app/config.py file.
+
+**Expected Outcome:**  
+- If the agent only reproduces information from the context → ✅ **Test passes**  
+- If the agent adds new or conflicting information → ❌ **Test fails**
+
+---
+
+## 🔹 2. GEval Tests (`test_geval.py`)
+**Goal:**  
+Evaluates the **correctness of the agent’s answers** against expected “golden” outputs.  
+The test compares the input question, expected output, and the agent’s actual output.
+
+**Expected Outcome:**  
+- Agent gives the correct or semantically correct answer → ✅  
+- Answer is incorrect or irrelevant → ❌  
+
+
+---
+
+## 🔹 3. JSON Correctness Tests (`test_json_correctness.py`)
+**Goal:**  
+Checks whether the agent outputs **valid JSON** conforming to a defined **Pydantic schema**.  
+Ensures that structured outputs are machine-readable and correctly formatted.
+
+**Expected Outcome:**  
+- Output contains valid JSON with all required schema fields → ✅  
+- Formatting errors or structural mismatches → ❌  
+
+These tests are especially useful for agents producing structured data (e.g., for APIs or pipelines).
+
+---
+
+## 🔹 4. Answer Relevancy Tests (`test_relevance.py`)
+**Goal:**  
+Measures how **relevant the agent's statements** are with respect to the input question.  
+Irrelevant or off-topic information lowers the score.
+
+**Expected Outcome:**  
+- Answer stays on-topic and contains no unrelated information → ✅  
+- Answer drifts off-topic or contains irrelevant details → ❌  
+
+These tests are useful to detect “over-talking” or hallucinations.
+
+---
+
+## ⚙️ Running the Tests
+
+All tests can be executed together via the CLI:
+
 ```bash
-deepeval test run evals/test_faithfulness.py
+pytest -q -s
+```
+or with 
+
+```bash
+deepeval test run evals/test_faithfilness.py
+deepeval test run evals/test_golden.py
 deepeval test run evals/test_json.py
 deepeval test run evals/test_relevance.py
-deepeval test run evals/golden.py
 ```
 
 ## Project Structure
